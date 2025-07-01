@@ -67,6 +67,8 @@ const Container = styled.div`
   grid-template-rows: 10% 75% 15%;
   overflow: hidden;
   background-color: #f3f4f6;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
 
   .brand {
     display: flex;
