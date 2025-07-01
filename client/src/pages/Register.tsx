@@ -40,7 +40,8 @@ const Register = () => {
   }
 
   const handleValidation = () => {
-    const { password, confirmPassword, username, email } = values
+    const { password, confirmPassword, username, email } = values;
+    
     if (password !== confirmPassword)
     {
       toast.error("Password and confirm password should be the same.", toastOptions)
@@ -68,37 +69,35 @@ const Register = () => {
     e.preventDefault()
     setLoading(true)
 
-    if (handleValidation())
-    {
-      const { email, username, password } = values
-      try
-      {
-        const response = await fetch(registerRoute, {
-          method: 'POST',
-          headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ email, username, password })
-        })
-
-        const data: Data = await response.json()
-        setLoading(false)
-
-        if (!response.ok || data.status === false)
-        {
-          toast.error(data.msg || response.statusText, toastOptions)
-          return
-        }
-
-        // Atualiza user no contexto e localStorage via setUser
-        setUser(data.user)
-        navigate('/')
-      } catch (err)
-      {
-        setLoading(false)
-        toast.error("Network error", toastOptions)
-      }
-    } else
-    {
+    if (!handleValidation()) {
       setLoading(false)
+      return
+    }
+
+    const { email, username, password } = values;
+
+    try {
+      const response = await fetch(registerRoute, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ email, username, password })
+      })
+
+      const data: Data = await response.json()
+      setLoading(false)
+
+      if (!response.ok || data.status === false)
+      {
+        const errorMsg = data?.msg || response.statusText || "Registration failed"
+        toast.error(errorMsg, toastOptions)
+        return
+      }
+
+      setUser(data.user)
+      navigate('/')
+    } catch (err) {
+      setLoading(false)
+      toast.error("Network error or server not responding", toastOptions)
     }
   }
 
