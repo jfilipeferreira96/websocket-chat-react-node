@@ -21,11 +21,11 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   const toastOptions: ToastOptions = {
-    position: "bottom-right",
+    position: "top-right",
     autoClose: 8000,
     pauseOnHover: true,
     draggable: true,
-    theme: "dark",
+    theme: "light",
   };
 
   // Redireciona se já estiver logado
