@@ -25,17 +25,20 @@ export const Welcome = () => {
   );
 };
 
-
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: #1f2937;
   flex-direction: column;
+  background-color: #f3f4f6;
+
   img {
-    height: 20rem;
+    height: 18rem;
   }
+
   span {
-    color: #4e0eff;
+    color: #6366f1;
+    font-weight: 600;
   }
 `;
