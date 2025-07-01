@@ -15,8 +15,7 @@ export const Contacts = ({ contacts, changeChat }: ContactsIf) => {
   const [currentUserImage, setCurrentUserImage] = useState<string>("");
   const [currentSelected, setCurrentSelected] = useState<number | null>(null);
 
-  useEffect(() =>
-  {
+  useEffect(() => {
     if (user)
     {
       setCurrentUserName(user.username ?? "");
@@ -29,38 +28,40 @@ export const Contacts = ({ contacts, changeChat }: ContactsIf) => {
   };
 
   return (
-    <>
-      <Container>
-        <div className="brand">
-          <h3>Chat</h3>
-        </div>
-        <div className="contacts">
-          {contacts.map((contact, index) => {
-            return (
-              <div key={contact._id} className={`contact ${index === currentSelected ? "selected" : ""}`} onClick={() => changeCurrentChat(index, contact)}>
-                <div className="avatar">
-                  <img src={userImageDefault} alt={contact._id} />
-                </div>
-                <div className="username">
-                  <h3>{contact.username}</h3>
-                </div>
+    <Container>
+      <div className="brand">
+        <h3>Chat</h3>
+      </div>
+
+      <div className="contacts">
+        {contacts.length === 0 ? (
+          <p className="no-contacts">Oops! No contacts found. Try creating another account to start chatting.</p>
+        ) : (
+          contacts.map((contact, index) => (
+            <div key={contact._id} className={`contact ${index === currentSelected ? "selected" : ""}`} onClick={() => changeCurrentChat(index, contact)}>
+              <div className="avatar">
+                <img src={userImageDefault} alt={contact._id} />
               </div>
-            );
-          })}
+              <div className="username">
+                <h3>{contact.username}</h3>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      <div className="current-user">
+        <div className="avatar">
+          <img src={dogFace} alt="avatar" />
         </div>
-        <div className="current-user">
-          <div className="avatar">
-            <img src={dogFace} alt="avatar" />
-          </div>
-          <div className="username">
-            <h2>{currentUserName}</h2>
-          </div>
-          <Logout />
+        <div className="username">
+          <h2>{currentUserName}</h2>
         </div>
-      </Container>
-    </>
+        <Logout />
+      </div>
+    </Container>
   );
-}
+};
 
 const Container = styled.div`
   display: grid;
@@ -129,6 +130,14 @@ const Container = styled.div`
       .username h3 {
         color: white;
       }
+    }
+
+    .no-contacts {
+      color: #6b7280;
+      font-size: 1rem;
+      text-align: center;
+      padding: 1rem;
+      max-width: 80%;
     }
   }
 
