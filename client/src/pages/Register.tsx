@@ -8,8 +8,7 @@ import { Data } from '../types'
 import Loader from '../components/Loader'
 import { useUser } from '../context/UserContext'
 
-const Register = () =>
-{
+const Register = () => {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   const { user, setUser } = useUser()
@@ -29,22 +28,18 @@ const Register = () =>
     confirmPassword: ""
   })
 
-  // Aqui usamos o contexto user para redirecionar se já estiver logado
-  useEffect(() =>
-  {
+  useEffect(() => {
     if (user !== null)
     {
       navigate('/')
     }
   }, [user, navigate])
 
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) =>
-  {
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
   }
 
-  const handleValidation = () =>
-  {
+  const handleValidation = () => {
     const { password, confirmPassword, username, email } = values
     if (password !== confirmPassword)
     {
@@ -69,8 +64,7 @@ const Register = () =>
     return true
   }
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) =>
-  {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
     setLoading(true)
 

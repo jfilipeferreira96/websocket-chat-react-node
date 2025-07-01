@@ -28,22 +28,18 @@ const Login = () => {
     theme: "light",
   };
 
-  // Redireciona se já estiver logado
-  useEffect(() =>
-  {
+  useEffect(() => {
     if (user)
     {
       navigate("/");
     }
   }, [user, navigate]);
 
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) =>
-  {
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const validateForm = () =>
-  {
+  const validateForm = () => {
     const { username, password } = values;
     if (!username || !password)
     {
@@ -53,8 +49,7 @@ const Login = () => {
     return true;
   };
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) =>
-  {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
 

@@ -16,16 +16,14 @@ const Chat = () => {
   const [currentChat, setCurrentChat] = useState<Contact | undefined>(undefined)
   const { user } = useUser()
 
-  useEffect(() =>
-  {
+  useEffect(() => {
     if (!user)
     {
       navigate('/login')
     }
   }, [user, navigate])
 
-  useEffect(() =>
-  {
+  useEffect(() => {
     if (user)
     {
       socket.current = io(host)
@@ -33,8 +31,7 @@ const Chat = () => {
     }
   }, [user])
 
-  useEffect(() =>
-  {
+  useEffect(() => {
     const fetchContacts = async () => {
       if (!user) return
       if (user)
@@ -48,8 +45,7 @@ const Chat = () => {
     fetchContacts()
   }, [user, navigate])
 
-  const handleChatChange = (chat: Contact) =>
-  {
+  const handleChatChange = (chat: Contact) => {
     setCurrentChat(chat)
   }
 
