@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import Robot from "../assets/robot.gif";
+import WelcomeGif from "../assets/d9252dbe4d8f1a9fee4212e80b60c64a.gif";
 import { useUser } from "../context/UserContext";
 
 export const Welcome = () => {
@@ -16,7 +16,7 @@ export const Welcome = () => {
 
   return (
     <Container>
-      <img src={Robot} alt="Welcome Gif" />
+      <img src={WelcomeGif} alt="Welcome Gif" />
       <h1>
         Welcome, <span>{userName}!</span>
       </h1>
